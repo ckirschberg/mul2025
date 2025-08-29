@@ -10,19 +10,28 @@ const studentEmail2 = 'caroline@caroline.dk';
 const student1 = {
     name: 'Dayan',
     email: 'dayan@dayan.dk',
-    tlf: '12345678'
+    phone: '12345678'
 }
 
+
+let myName = "Christian";
+myName = "Maria";
+
+
+//js objekt
 const student2 = {
     name: 'Pavla',
     email: 'pavla@pavla.dk',
-    tlf: '87654321'
+    phone: '87654321'
 }
 
+student2.name = 'Emil';
+
+// js array med strings
 const names = ['Maria', 'Pavla', 'Caroline', 'Persian'];
 names.push("Emil")
 
-
+// js array med objekter
 const students = [student1, student2];
 // console.log(names);
 // console.log(students);
@@ -30,12 +39,34 @@ const students = [student1, student2];
 // console.log(students[0]); // 0 indexed
 // console.log(students[1].name); // 0 indexed
 
-students.forEach((element) => {
-    console.log(element);
-    alert("Now calling " + element.tlf + " to speak with " + element.name)
+students.forEach((student) => {
+    // html template som hedder student, som definerer en studerende i html
+    let studentHtml = document.getElementById("student"); 
+    // console.log(studentHtml);
+    
+    // opretter en kopi fordi jeg skal have en templates indhold per student
+    let clon = studentHtml.content.cloneNode(true);
+    // console.log(clon);
+    
+    // udvælger navnet, email og phone
+    let pName = clon.querySelector(".name");
+    let pEmail = clon.querySelector(".email");
+    let pPhone = clon.querySelector(".phone");
+
+    // Sætter jeg den studerendes værdier ind i klonen af templaten
+    pName.innerText = student.name;
+    pEmail.innerText = student.email;
+    pPhone.innerText = student.phone;
+
+    // indsætter vi templaten i html dokumentet (så brugeren kan se den)
+    document.getElementById("students").appendChild(clon);
+    
+    // console.log(element);
+    // alert("Now calling " + element.tlf + " to speak with " + element.name)
 })
 
-
+// 1: Lægge flower objekter i array
+// 2: Loop igennem array og console.log() hvert objekt
 
 document.getElementById("add").addEventListener("click", () => {
     
