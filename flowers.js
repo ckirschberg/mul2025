@@ -19,6 +19,22 @@ const student2 = {
     tlf: '87654321'
 }
 
+const names = ['Maria', 'Pavla', 'Caroline', 'Persian'];
+names.push("Emil")
+
+
+const students = [student1, student2];
+// console.log(names);
+// console.log(students);
+
+// console.log(students[0]); // 0 indexed
+// console.log(students[1].name); // 0 indexed
+
+students.forEach((element) => {
+    console.log(element);
+    alert("Now calling " + element.tlf + " to speak with " + element.name)
+})
+
 
 
 document.getElementById("add").addEventListener("click", () => {
