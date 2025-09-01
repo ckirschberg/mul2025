@@ -1,3 +1,56 @@
+import { alertTest } from "./alert-test.js";
+
+// alertTest();
+
+document.getElementById("student-form").addEventListener("submit", (event) => {
+    event.preventDefault() // stopper standard opførslen, hvor browseren reloader siden
+
+    const name = document.getElementById("name").value
+    //const name2 = event.target[0].value; // henter også name
+    const email = document.getElementById("email").value
+    const phone = document.getElementById("phone").value
+
+    console.log(name, email, phone)
+
+    if (name === "") {
+        alert("Der mangler et navn")
+    }
+    if (email === "") {
+        alert("Der mangler email")
+    }
+    if (phone === "") {
+        alert("Der mangler phone")
+    }
+
+
+    if (name !== "" && email !== "" && phone !== "") {
+        addStudentToDOM(name, email, phone)
+    }
+    //console.log(event.target["name"].value);
+
+
+})
+
+function addStudentToDOM(name, email, phone) {
+    let studentHtml = document.getElementById("student"); 
+    console.log(name, email, phone);
+    
+    
+    // opretter en kopi fordi jeg skal have en templates indhold per student
+    let clon = studentHtml.content.cloneNode(true);
+    console.log(clon);
+    
+    console.log(clon.querySelector(".name"));
+    
+    // Sætter jeg den studerendes værdier ind i klonen af templaten
+    clon.querySelector(".name").innerText = name;
+    clon.querySelector(".email").innerText = email;
+    clon.querySelector(".phone").innerText = phone;
+
+    // indsætter vi templaten i html dokumentet (så brugeren kan se den)
+    document.getElementById("students").appendChild(clon);
+}
+
 const price = 250;
 
 const studentName1 = 'Dayan';
@@ -40,29 +93,7 @@ const students = [student1, student2];
 // console.log(students[1].name); // 0 indexed
 
 students.forEach((student) => {
-    // html template som hedder student, som definerer en studerende i html
-    let studentHtml = document.getElementById("student"); 
-    // console.log(studentHtml);
-    
-    // opretter en kopi fordi jeg skal have en templates indhold per student
-    let clon = studentHtml.content.cloneNode(true);
-    // console.log(clon);
-    
-    // udvælger navnet, email og phone
-    let pName = clon.querySelector(".name");
-    let pEmail = clon.querySelector(".email");
-    let pPhone = clon.querySelector(".phone");
-
-    // Sætter jeg den studerendes værdier ind i klonen af templaten
-    pName.innerText = student.name;
-    pEmail.innerText = student.email;
-    pPhone.innerText = student.phone;
-
-    // indsætter vi templaten i html dokumentet (så brugeren kan se den)
-    document.getElementById("students").appendChild(clon);
-    
-    // console.log(element);
-    // alert("Now calling " + element.tlf + " to speak with " + element.name)
+    addStudentToDOM(student.name, student.email, student.phone);
 })
 
 // 1: Lægge flower objekter i array
