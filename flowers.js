@@ -1,6 +1,10 @@
 import { alertTest } from "./alert-test.js";
-
+import { getData } from "./api.js";
 // alertTest();
+
+
+const cats = await getData(); // her kalder jeg php serveren gennem funktionen fra api.js filen.
+console.log(cats);
 
 document.getElementById("student-form").addEventListener("submit", (event) => {
     event.preventDefault() // stopper standard opførslen, hvor browseren reloader siden
@@ -10,7 +14,7 @@ document.getElementById("student-form").addEventListener("submit", (event) => {
     const email = document.getElementById("email").value
     const phone = document.getElementById("phone").value
 
-    console.log(name, email, phone)
+    // console.log(name, email, phone)
 
     if (name === "") {
         alert("Der mangler et navn")
@@ -33,14 +37,14 @@ document.getElementById("student-form").addEventListener("submit", (event) => {
 
 function addStudentToDOM(name, email, phone) {
     let studentHtml = document.getElementById("student"); 
-    console.log(name, email, phone);
+    // console.log(name, email, phone);
     
     
     // opretter en kopi fordi jeg skal have en templates indhold per student
     let clon = studentHtml.content.cloneNode(true);
-    console.log(clon);
+    // console.log(clon);
     
-    console.log(clon.querySelector(".name"));
+    // console.log(clon.querySelector(".name"));
     
     // Sætter jeg den studerendes værdier ind i klonen af templaten
     clon.querySelector(".name").innerText = name;
