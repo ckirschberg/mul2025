@@ -1,58 +1,64 @@
 import { alertTest } from "./alert-test.js";
-import { getData } from "./api.js";
+import { getData, createCat } from "./api.js";
 // alertTest();
 
 
 const cats = await getData(); // her kalder jeg php serveren gennem funktionen fra api.js filen.
 console.log(cats);
 
-document.getElementById("student-form").addEventListener("submit", (event) => {
+
+document.getElementById("color").addEventListener("input", (e) => {
+    const value = e.target.value;
+    // console.log(value);
+    document.getElementById("counter").innerText = value.length;
+
+    // console.log(value.length);
+    if (value.length > 10) {
+        alert("Max 10 tegn")
+        document.getElementById("color").value = value.substr(0,10);
+    }  
+})
+
+
+document.getElementById("cat-form").addEventListener("submit", (event) => {
     event.preventDefault() // stopper standard opførslen, hvor browseren reloader siden
 
     const name = document.getElementById("name").value
     //const name2 = event.target[0].value; // henter også name
-    const email = document.getElementById("email").value
-    const phone = document.getElementById("phone").value
+    const color = document.getElementById("color").value
+    // const phone = document.getElementById("phone").value
 
     // console.log(name, email, phone)
 
     if (name === "") {
         alert("Der mangler et navn")
+    } else if (color === "") {
+        alert("Der mangler color")
+    } else {
+        createCat(name, color);
     }
-    if (email === "") {
-        alert("Der mangler email")
-    }
-    if (phone === "") {
-        alert("Der mangler phone")
-    }
+    // if (phone === "") {
+    //     alert("Der mangler phone")
+    // }
 
+    addCatToDOM(name, color)    
 
-    if (name !== "" && email !== "" && phone !== "") {
-        addStudentToDOM(name, email, phone)
-    }
     //console.log(event.target["name"].value);
 
 
 })
 
-function addStudentToDOM(name, email, phone) {
-    let studentHtml = document.getElementById("student"); 
-    // console.log(name, email, phone);
-    
-    
-    // opretter en kopi fordi jeg skal have en templates indhold per student
-    let clon = studentHtml.content.cloneNode(true);
-    // console.log(clon);
-    
-    // console.log(clon.querySelector(".name"));
+function addCatToDOM(name, color) {
+    let catHtml = document.getElementById("cat"); 
+    let clon = catHtml.content.cloneNode(true);
     
     // Sætter jeg den studerendes værdier ind i klonen af templaten
     clon.querySelector(".name").innerText = name;
-    clon.querySelector(".email").innerText = email;
-    clon.querySelector(".phone").innerText = phone;
+    clon.querySelector(".color").innerText = color;
+    // clon.querySelector(".phone").innerText = phone;
 
     // indsætter vi templaten i html dokumentet (så brugeren kan se den)
-    document.getElementById("students").appendChild(clon);
+    document.getElementById("cats").appendChild(clon);
 }
 
 const price = 250;
@@ -89,15 +95,15 @@ const names = ['Maria', 'Pavla', 'Caroline', 'Persian'];
 names.push("Emil")
 
 // js array med objekter
-const students = [student1, student2];
+// const students = [student1, student2];
 // console.log(names);
 // console.log(students);
 
 // console.log(students[0]); // 0 indexed
 // console.log(students[1].name); // 0 indexed
 
-students.forEach((student) => {
-    addStudentToDOM(student.name, student.email, student.phone);
+cats.forEach((cat) => {
+        addCatToDOM(cat.name, cat.primarycolor)
 })
 
 // 1: Lægge flower objekter i array

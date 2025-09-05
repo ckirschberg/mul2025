@@ -9,26 +9,30 @@
   </head>
   <body>
 
-    <template id="student">
-        <div class="pip-container">
+    <template id="cat">
+        <div class="cats-container">
             <p class="name"></p>
-            <p class="email"></p>
-            <p class="phone"></p>
+            <p class="color"></p>
+            <!-- <p class="phone"></p> -->
         </div>
     </template>
 
-    <form id="student-form">
+    <form id="cat-form">
         <label for="name">Name:</label>
         <input name="name" id="name"/>
 
-        <label for="email">Email</label>
-        <input id="email" name="email"/>
-
-        <label for="phone">Phone</label>
-        <input name="phone" id="phone"/>
+        <label for="primarycolor">Color</label>
+        <input id="color" name="primarycolor"/>
+        <span id="counter">0</span><span> / 255</span>
+        <!-- <label for="phone">Phone</label>
+        <input name="phone" id="phone"/> -->
 
         <button type="submit">Tilføj</button>
     </form>
+    <div id="cats">
+
+    </div>
+
 
   
 
@@ -44,9 +48,6 @@
         <p id="total">0 kr</p>
     </div>
 
-      <div id="students">
-
-    </div>
 
   </body>
 </html>
