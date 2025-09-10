@@ -3,7 +3,7 @@ import { getData, createCat } from "./api.js";
 // alertTest();
 
 
-const cats = await getData(); // her kalder jeg php serveren gennem funktionen fra api.js filen.
+const cats = await getData(0); // Hent de første 5. her kalder jeg php serveren gennem funktionen fra api.js filen.
 console.log(cats);
 
 
